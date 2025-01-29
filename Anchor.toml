@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-local_solana_migrate = "4jrqgyS6Wc7qZL2WsEaxaqUuDxRSZwXaYZ2Mkwqrmp9F"
+local_solana_migrate = "GYAAArQX2sW9ju2FqXawS73bSjA3JwHKT2gmyLWsRZeN"
 
 [programs.devnet]
 local_solana_migrate = "3ZCPySRfFaDPthn5G5en7WzvZd5dtv3XvBR7zjHVRxZh"
@@ -14,7 +14,7 @@ local_solana_migrate = "3ZCPySRfFaDPthn5G5en7WzvZd5dtv3XvBR7zjHVRxZh"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
