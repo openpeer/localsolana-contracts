@@ -3,27 +3,8 @@ use anchor_lang::solana_program::{ program::invoke, system_instruction };
 use anchor_spl::token::{ self, Mint, Token, TokenAccount, Transfer };
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::associated_token::{ create, get_associated_token_address };
-use solana_program::{
-    account_info::AccountInfo,
-    entrypoint,
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-};
 
 declare_id!("1w3ekpHrruiEJPYKpQH6rQssTRNKCKiqUjfQeJXTTrX");
-
-// Declare and export the program's entrypoint
-entrypoint!(process_instruction);
-
-// Program entrypoint's implementation
-pub fn process_instruction(
-    program_id: &Pubkey,
-    accounts: &[AccountInfo],
-    instruction_data: &[u8],
-) -> ProgramResult {
-    // Add your program logic here
-    Ok(())
-}
 
 #[program]
 pub mod local_solana_migrate {
