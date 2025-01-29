@@ -3,14 +3,19 @@ use anchor_lang::solana_program::{ program::invoke, system_instruction };
 use anchor_spl::token::{ self, Mint, Token, TokenAccount, Transfer };
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::associated_token::{ create, get_associated_token_address };
+mod constants;
+use constants::*;
 
+#[cfg(feature = "localnet")]
 declare_id!("GYAAArQX2sW9ju2FqXawS73bSjA3JwHKT2gmyLWsRZeN");
+#[cfg(feature = "devnet")]
+declare_id!("3ZCPySRfFaDPthn5G5en7WzvZd5dtv3XvBR7zjHVRxZh");
+#[cfg(feature = "mainnet")]
+declare_id!("YOUR_MAINNET_PROGRAM_ID");
 
 #[program]
 pub mod local_solana_migrate {
     use super::*;
-
-    pub const DISPUTE_FEE: u64 = 5_000_000;
 
     pub fn initialize(
         ctx: Context<Initialize>,
@@ -44,7 +49,7 @@ pub mod local_solana_migrate {
             SolanaErrorCode::InvalidBuyer
         );
         require!(
-            seller_waiting_time >= 15 * 60 && seller_waiting_time <= 24 * 60 * 60,
+            seller_waiting_time >= MIN_SELLER_WAITING_TIME && seller_waiting_time <= MAX_SELLER_WAITING_TIME,
             SolanaErrorCode::InvalidSellerWaitingTime
         );
 
@@ -56,7 +61,7 @@ pub mod local_solana_migrate {
         escrow_account.fee = ((amount * ctx.accounts.escrow_state.fee_bps) / 10000) as u64;
         escrow_account.dispute = false;
         escrow_account.partner = ctx.accounts.partner.key();
-        escrow_account.open_peer_fee = ((amount * 30) / 10000) as u64;
+        escrow_account.open_peer_fee = ((amount * OPEN_PEER_FEE_BPS) / 10000) as u64;
         escrow_account.automatic_escrow = automatic_escrow;
         escrow_account.amount = amount;
         escrow_account.token = Pubkey::default();
@@ -92,7 +97,7 @@ pub mod local_solana_migrate {
             SolanaErrorCode::InvalidBuyer
         );
         require!(
-            seller_waiting_time >= 15 * 60 && seller_waiting_time <= 24 * 60 * 60,
+            seller_waiting_time >= MIN_SELLER_WAITING_TIME && seller_waiting_time <= MAX_SELLER_WAITING_TIME,
             SolanaErrorCode::InvalidSellerWaitingTime
         );
 
@@ -104,7 +109,7 @@ pub mod local_solana_migrate {
         escrow_account.fee = ((amount * ctx.accounts.escrow_state.fee_bps) / 10000) as u64;
         escrow_account.dispute = false;
         escrow_account.partner = ctx.accounts.partner.key();
-        escrow_account.open_peer_fee = ((amount * 30) / 10000) as u64;
+        escrow_account.open_peer_fee = ((amount * OPEN_PEER_FEE_BPS) / 10000) as u64;
         escrow_account.automatic_escrow = automatic_escrow;
         escrow_account.amount = amount;
         escrow_account.token = Pubkey::default();
@@ -137,7 +142,7 @@ pub mod local_solana_migrate {
             SolanaErrorCode::InvalidBuyer
         );
         require!(
-            seller_waiting_time >= 15 * 60 && seller_waiting_time <= 24 * 60 * 60,
+            seller_waiting_time >= MIN_SELLER_WAITING_TIME && seller_waiting_time <= MAX_SELLER_WAITING_TIME,
             SolanaErrorCode::InvalidSellerWaitingTime
         );
         let escrow_account = &mut ctx.accounts.escrow;
@@ -148,7 +153,7 @@ pub mod local_solana_migrate {
         escrow_account.fee = ((amount * ctx.accounts.escrow_state.fee_bps) / 10000) as u64;
         escrow_account.dispute = false;
         escrow_account.partner = ctx.accounts.partner.key();
-        escrow_account.open_peer_fee = ((amount * 30) / 10000) as u64;
+        escrow_account.open_peer_fee = ((amount * OPEN_PEER_FEE_BPS) / 10000) as u64;
         escrow_account.automatic_escrow = automatic_escrow;
         escrow_account.amount = amount;
         escrow_account.token = token;
@@ -270,7 +275,7 @@ pub mod local_solana_migrate {
             SolanaErrorCode::InvalidBuyer
         );
         require!(
-            seller_waiting_time >= 15 * 60 && seller_waiting_time <= 24 * 60 * 60,
+            seller_waiting_time >= MIN_SELLER_WAITING_TIME && seller_waiting_time <= MAX_SELLER_WAITING_TIME,
             SolanaErrorCode::InvalidSellerWaitingTime
         );
         let escrow_account = &mut ctx.accounts.escrow;
@@ -281,7 +286,7 @@ pub mod local_solana_migrate {
         escrow_account.fee = ((amount * ctx.accounts.escrow_state.fee_bps) / 10000) as u64;
         escrow_account.dispute = false;
         escrow_account.partner = ctx.accounts.partner.key();
-        escrow_account.open_peer_fee = ((amount * 30) / 10000) as u64;
+        escrow_account.open_peer_fee = ((amount * OPEN_PEER_FEE_BPS) / 10000) as u64;
         escrow_account.automatic_escrow = automatic_escrow;
         escrow_account.amount = amount;
         escrow_account.token = token;
