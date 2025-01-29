@@ -4,7 +4,7 @@ use anchor_spl::token::{ self, Mint, Token, TokenAccount, Transfer };
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::associated_token::{ create, get_associated_token_address };
 
-declare_id!("1w3ekpHrruiEJPYKpQH6rQssTRNKCKiqUjfQeJXTTrX");
+declare_id!("GYAAArQX2sW9ju2FqXawS73bSjA3JwHKT2gmyLWsRZeN");
 
 #[program]
 pub mod local_solana_migrate {
