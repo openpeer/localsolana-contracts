@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.7.3"
+  },
+  "name": "localsolana-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/openpeer/localsolana-contracts.git",
+  "author": "George Donnelly <me@georgedonnelly.com>",
+  "license": "MIT"
+}
